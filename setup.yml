@@ -1,0 +1,75 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    home_dir: /home/vagrant
+  tasks:
+    - name: Install PostgreSQL and pip2
+      apt:
+        name:
+          - postgresql
+          - python-pip
+        state: installed
+        update_cache: yes
+
+    - name: Install psycopg2 into system python
+      pip:
+        name: psycopg2
+        version: 2.7.3.2
+
+    - name: Create application user
+      become_user: postgres
+      postgresql_user:
+        name: grouporder
+        password: hunter2
+
+    - name: Create application DB
+      become_user: postgres
+      postgresql_db:
+        name: grouporder
+        owner: grouporder
+
+    - name: Enable pgcrypto
+      become_user: postgres
+      postgresql_ext:
+        name: pgcrypto
+        db: grouporder
+
+    - name: Add key for jonathanf PPA
+      apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: 4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659
+        state: present
+
+    - name: Add jonathanf PPA
+      apt_repository:
+        repo: deb http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial main
+        state: present
+
+    - name: Install Python 3.6
+      apt:
+        name: python3.6
+        state: present
+        update_cache: yes
+
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+
+    - name: Copy over requirements
+      copy:
+        src: requirements.txt
+        dest: "{{ home_dir }}/requirements.txt"
+
+    - name: Install 'virtualenv' package
+      pip:
+        name: virtualenv
+        executable: pip3
+
+    - name: Create virtualenv
+      pip:
+        virtualenv: "{{ home_dir }}/venv"
+        virtualenv_python: python3.6
+        requirements: "{{ home_dir }}/requirements.txt"
