@@ -69,6 +69,7 @@
         executable: pip3
 
     - name: Create virtualenv
+      become: no
       pip:
         virtualenv: "{{ home_dir }}/venv"
         virtualenv_python: python3.6
