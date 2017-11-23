@@ -70,7 +70,7 @@ class User():
         """
 
         with g.db.cursor() as cursor:
-            cursor.execute()
+            cursor.execute(query, (token,))
             session = cursor.fetchone()
 
         if session is None:
