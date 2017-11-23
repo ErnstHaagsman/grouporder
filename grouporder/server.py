@@ -3,13 +3,14 @@ import psycopg2
 from flask import Flask, g
 from flask_restful import Api
 
-from grouporder.api.users import UsersApi
+from grouporder.api.users import UsersApi, LoginApi
 
 app = Flask(__name__)
 api = Api(app)
 
 
 api.add_resource(UsersApi, '/users')
+api.add_resource(LoginApi, '/users/login')
 
 @app.before_request
 def before_request():

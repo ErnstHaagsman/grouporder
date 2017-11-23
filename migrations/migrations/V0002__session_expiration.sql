@@ -1,0 +1,2 @@
+ALTER TABLE sessions
+    ADD expiration TIMESTAMP WITH TIME ZONE;
