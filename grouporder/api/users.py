@@ -22,6 +22,10 @@ class UsersApi(Resource):
                                    args['fullname'],
                                    args['email'],
                                    args['password'])
-            return new_user.to_dict(), 201
+            return {
+                        'username': new_user.username,
+                        'fullname': new_user.fullname,
+                        'email': new_user.email
+                   }, 201
         except DuplicateUserError:
             abort(409, message='A user with this username already exists')

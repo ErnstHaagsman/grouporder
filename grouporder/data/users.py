@@ -17,13 +17,6 @@ class User():
         self.email = email
         self.can_manage_restaurants = can_manage_restaurants
 
-    def to_dict(self):
-        return {
-            'username': self.username,
-            'email': self.email,
-            'fullname': self.fullname
-        }
-
     @classmethod
     def create(cls,
                username,
