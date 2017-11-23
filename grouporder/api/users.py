@@ -57,10 +57,10 @@ class LoginApi(Resource):
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not hasattr(request.headers, 'Authentication'):
+        if not hasattr(request.headers, 'Authorization'):
             abort(403)
 
-        auth_string = request.headers['Authentication']
+        auth_string = request.headers['Authorization']
 
         if not auth_string.lower().startswith('bearer '):
             abort(403)
