@@ -26,6 +26,8 @@ database to the latest version:
 You can configure the database credentials in the `setup.yml` Ansible playbook.
 Defaults:
 
+|Key         | Value      |
+|------------|------------|
 |Host        | Localhost  |
 |Database    | grouporder |
 |Username    | grouporder |
