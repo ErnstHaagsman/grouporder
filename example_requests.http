@@ -1,0 +1,75 @@
+POST http://localhost:5000/users
+Accept: application/json
+Content-Type: application/json
+
+{
+    "username": "jack",
+    "password": "hunter2",
+    "email": "jack@example.com"
+}
+
+###
+
+
+POST http://localhost:5000/users/login
+# This route returns a token which should be provided to routes that need
+# authorization.
+Accept: application/json
+Content-Type: application/json
+
+{
+    "username": "jack",
+    "password": "hunter2"
+}
+
+###
+POST http://localhost:5000/restaurants
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
+
+{
+    "name": "Tyfo Restaurant"
+}
+
+###
+
+PUT http://localhost:5000/restaurant/1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
+
+{
+    "name": "Typo Restaurant"
+}
+
+###
+
+POST http://localhost:5000/restaurant/1/menu
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+
+{
+    "name": "Pizza Example",
+    "price": 123
+}
+
+###
+
+PUT http://localhost:5000/restaurant/1/menu/1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+
+{
+    "name": "Pizza Example",
+    "price": 12.50
+}
+
+###
+
+DELETE http://localhost:5000/restaurant/1/menu/1
+Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+
+###
