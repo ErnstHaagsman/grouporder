@@ -1,8 +1,8 @@
 from flask import request
 from flask_restful import Resource, abort, reqparse
 
-from grouporder.api.users import login_required
-from grouporder.data.restaurants import Restaurant, DuplicateRestaurantNameError
+from api.users import login_required
+from data.restaurants import Restaurant, DuplicateRestaurantNameError
 
 
 class RestaurantsApi(Resource):

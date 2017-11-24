@@ -2,8 +2,8 @@ import dateutil.parser as date_parser
 from flask import request
 from flask_restful import Resource, reqparse
 
-from grouporder.api.users import login_required
-from grouporder.data.orders import Order
+from api.users import login_required
+from data.orders import Order
 
 
 class GroupOrdersApi(Resource):

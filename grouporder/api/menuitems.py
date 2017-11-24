@@ -1,8 +1,8 @@
 from flask import request
 from flask_restful import Resource, abort, reqparse
 
-from grouporder.api.users import login_required
-from grouporder.data.menuitems import MenuItem
+from api.users import login_required
+from data.menuitems import MenuItem
 
 
 class MenuItemsApi(Resource):

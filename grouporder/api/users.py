@@ -4,7 +4,7 @@ from functools import wraps
 
 from flask_restful import Resource, reqparse, abort
 
-from grouporder.data.users import User, DuplicateUserError, login
+from data.users import User, DuplicateUserError, login
 
 
 class UsersApi(Resource):

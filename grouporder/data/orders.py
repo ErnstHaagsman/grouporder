@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import g
 
-from grouporder.data.menuitems import MenuItem
+from data.menuitems import MenuItem
 
 
 class Order:

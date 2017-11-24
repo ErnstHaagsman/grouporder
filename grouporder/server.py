@@ -6,13 +6,13 @@ import simplejson as json
 from flask import Flask, g, make_response
 from flask_restful import Api
 
-from grouporder.api.grouporder import GroupOrderApi
-from grouporder.api.grouporders import GroupOrdersApi
-from grouporder.api.menuitem import MenuItemApi
-from grouporder.api.menuitems import MenuItemsApi
-from grouporder.api.restaurant import RestaurantApi
-from grouporder.api.restaurants import RestaurantsApi
-from grouporder.api.users import UsersApi, LoginApi
+from api.grouporder import GroupOrderApi
+from api.grouporders import GroupOrdersApi
+from api.menuitem import MenuItemApi
+from api.menuitems import MenuItemsApi
+from api.restaurant import RestaurantApi
+from api.restaurants import RestaurantsApi
+from api.users import UsersApi, LoginApi
 
 app = Flask(__name__)
 api = Api(app)

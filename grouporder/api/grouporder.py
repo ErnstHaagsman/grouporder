@@ -1,9 +1,9 @@
 from flask import request
 from flask_restful import Resource, reqparse
 
-from grouporder.api.users import login_required
-from grouporder.data.lineitems import LineItem
-from grouporder.data.orders import Order
+from api.users import login_required
+from data.lineitems import LineItem
+from data.orders import Order
 
 
 class GroupOrderApi(Resource):
