@@ -98,3 +98,21 @@ Authorization: Bearer 43e7cfd5-63c5-40ee-868b-fca4f09a4dc7
 }
 
 ###
+
+POST http://localhost:5000/orders/8
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 1503f404-ecee-487b-9710-10b34145666f
+
+{
+    "menu_item_id": 2
+}
+
+###
+
+GET http://localhost:5000/orders/8
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 1503f404-ecee-487b-9710-10b34145666f
+
+###

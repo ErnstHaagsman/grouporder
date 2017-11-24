@@ -79,6 +79,13 @@ class MenuItem:
             price=price
         )
 
+    def for_json(self):
+        return {
+            'id': self.item_id,
+            'name': self.name,
+            'price': self.price
+        }
+
     def update(self, name, price):
         query = """
             UPDATE

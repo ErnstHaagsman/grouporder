@@ -2,6 +2,8 @@ from datetime import datetime
 
 from flask import g
 
+from grouporder.data.menuitems import MenuItem
+
 
 class Order:
     def __init__(self,
@@ -120,3 +122,60 @@ class Order:
             g.db.commit()
 
         self.order_time = new_time
+
+    def get_all_items(self):
+        query = """
+            SELECT
+              l.username,
+              m.item_id,
+              m.name,
+              m.price
+            FROM
+              lineitems l
+            INNER JOIN menuitems m ON l.item_id = m.item_id
+            WHERE
+              l.order_id = %s;
+        """
+
+        with g.db.cursor() as cursor:
+            cursor.execute(query, (self.order_id,))
+            rows = cursor.fetchall()
+
+        items = {}
+        for row in rows:
+            username = row[0]
+            if username not in items:
+                items[username] = []
+
+            items[username].append(MenuItem(row[1],
+                                            self.restaurant_id,
+                                            row[2],
+                                            row[3]))
+
+        return items
+
+    def get_items_for_user(self, username):
+        query = """
+            SELECT
+              m.item_id,
+              m.name,
+              m.price
+            FROM
+              lineitems l
+            INNER JOIN menuitems m ON l.item_id = m.item_id
+            WHERE
+              l.order_id = %s AND l.username = %s;
+        """
+
+        with g.db.cursor() as cursor:
+            cursor.execute(query, (self.order_id, username))
+            rows = cursor.fetchall()
+
+        items = []
+        for row in rows:
+            items.append(MenuItem(row[0],
+                                  self.restaurant_id,
+                                  row[1],
+                                  row[2]))
+
+        return items

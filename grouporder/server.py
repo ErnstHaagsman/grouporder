@@ -6,6 +6,7 @@ import simplejson as json
 from flask import Flask, g, make_response
 from flask_restful import Api
 
+from grouporder.api.grouporder import GroupOrderApi
 from grouporder.api.grouporders import GroupOrdersApi
 from grouporder.api.menuitem import MenuItemApi
 from grouporder.api.menuitems import MenuItemsApi
@@ -24,6 +25,7 @@ api.add_resource(RestaurantApi, '/restaurant/<int:id>')
 api.add_resource(MenuItemsApi, '/restaurant/<int:restaurant_id>/menu')
 api.add_resource(MenuItemApi, '/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>')
 api.add_resource(GroupOrdersApi, '/orders')
+api.add_resource(GroupOrderApi, '/orders/<int:order_id>')
 
 
 def encode_to_json(o):
@@ -38,7 +40,9 @@ def encode_to_json(o):
                     .format(o.__class__.__name__))
 
 
-json_encoder = json.JSONEncoder(default=encode_to_json)
+json_encoder = json.JSONEncoder(default=encode_to_json,
+                                for_json=True,
+                                indent=4*' ')
 
 @api.representation('application/json')
 def output_json(data, code, headers=None):
