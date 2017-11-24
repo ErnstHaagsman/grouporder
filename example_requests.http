@@ -4,6 +4,7 @@ Content-Type: application/json
 
 {
     "username": "jack",
+    "fullname": "Jack Smith",
     "password": "hunter2",
     "email": "jack@example.com"
 }
@@ -71,5 +72,17 @@ Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
 
 DELETE http://localhost:5000/restaurant/1/menu/1
 Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+
+###
+
+POST http://localhost:5000/orders
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 43e7cfd5-63c5-40ee-868b-fca4f09a4dc7
+
+{
+    "restaurant_id": 1,
+    "order_time": "2017-11-24T14:30"
+}
 
 ###
