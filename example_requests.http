@@ -86,3 +86,15 @@ Authorization: Bearer 43e7cfd5-63c5-40ee-868b-fca4f09a4dc7
 }
 
 ###
+
+POST http://localhost:5000/orders
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 43e7cfd5-63c5-40ee-868b-fca4f09a4dc7
+
+{
+    "restaurant_id": 1,
+    "order_time": "2017-11-24T15:30+0200"
+}
+
+###
