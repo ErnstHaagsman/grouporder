@@ -1,0 +1,30 @@
+- name: Install PostgreSQL and pip2
+  apt:
+    name:
+      - postgresql
+      - python-pip
+    state: installed
+    update_cache: yes
+
+- name: Install psycopg2 into system python
+  pip:
+    name: psycopg2
+    version: 2.7.3.2
+
+- name: Create application user
+  become_user: postgres
+  postgresql_user:
+    name: "{{ database_user }}"
+    password: "{{ database_password }}"
+
+- name: Create application DB
+  become_user: postgres
+  postgresql_db:
+    name: "{{ database_name }}"
+    owner: "{{ database_user }}"
+
+- name: Enable pgcrypto
+  become_user: postgres
+  postgresql_ext:
+    name: pgcrypto
+    db: "{{ database_name }}"
