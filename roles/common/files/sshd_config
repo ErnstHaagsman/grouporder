@@ -90,3 +90,4 @@ UseDNS no
 GSSAPIAuthentication no
 
 PermitRootLogin no
+AllowAgentForwarding yes
