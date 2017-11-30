@@ -24,6 +24,11 @@
     name: openssh-server
     state: present
 
+- name: Install Fail2Ban
+  apt:
+    name: fail2ban
+    state: present
+
 - name: Copy sshd_config
   become: yes
   file:
