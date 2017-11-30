@@ -48,6 +48,8 @@ class User():
             except psycopg2.Error as e:
                 if e.pgcode == errorcodes.UNIQUE_VIOLATION:
                     raise DuplicateUserError('Username already exists')
+                else:
+                    raise e
 
         return cls(username, fullname, email, can_manage_restaurants)
 
