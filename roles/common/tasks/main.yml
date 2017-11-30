@@ -11,6 +11,14 @@
     state: present
     key: "{{ ssh_authorized_key }}"
 
+- name: Enable passwordless sudo for admin user
+  become: yes
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    line: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+    validate: 'visudo -cf %s'
+
 - name: Ensure SSH server is installed
   apt:
     name: openssh-server
