@@ -1,0 +1,26 @@
+- name: Create admin user
+  user:
+    name: "{{ username }}"
+    groups: sudo
+    append: yes
+    shell: /bin/bash
+
+- name: Add authorized key for admin user
+  authorized_key:
+    user: "{{ username }}"
+    state: present
+    key: "{{ ssh_authorized_key }}"
+
+- name: Ensure SSH server is installed
+  apt:
+    name: openssh-server
+    state: present
+
+- name: Copy sshd_config
+  become: yes
+  file:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+    mode: 0644
+  notify:
+    - Restart SSH
