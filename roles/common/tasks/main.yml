@@ -31,7 +31,7 @@
 
 - name: Copy sshd_config
   become: yes
-  file:
+  copy:
     src: files/sshd_config
     dest: /etc/ssh/sshd_config
     mode: 0644
