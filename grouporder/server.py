@@ -30,7 +30,7 @@ api.add_resource(GroupOrderApi, '/orders/<int:order_id>')
 
 def encode_to_json(o):
     """
-    The default function for JSON encoding, used to pre-process objects for
+    The default function for JSON encoding, used to process objects for
     JSON encoding
     """
     if type(o) is datetime:
