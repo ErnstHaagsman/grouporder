@@ -35,7 +35,7 @@ Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
 
 ###
 
-PUT http://localhost:5000/restaurant/1
+PUT http://localhost:5000/restaurants/1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
@@ -46,7 +46,7 @@ Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
 
 ###
 
-POST http://localhost:5000/restaurant/1/menu
+POST http://localhost:5000/restaurants/1/menu
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
@@ -58,7 +58,7 @@ Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
 
 ###
 
-PUT http://localhost:5000/restaurant/1/menu/1
+PUT http://localhost:5000/restaurants/1/menu/1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
@@ -70,7 +70,7 @@ Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
 
 ###
 
-DELETE http://localhost:5000/restaurant/1/menu/1
+DELETE http://localhost:5000/restaurants/1/menu/1
 Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
 
 ###
