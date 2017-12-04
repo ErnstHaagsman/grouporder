@@ -12,13 +12,15 @@
     line: "listen_addresses = '*'"
     regexp: "^listen_addresses"
     state: present
+  notify: Restart Postgres
 
 - name: Configure postgres to allow incoming connections
   lineinfile:
     path: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
-    line: "host all all 0.0.0.0/0"
-    regexp: "^host\\w+all"
+    line: "host all all 0.0.0.0/0 md5"
+    regexp: "^host\\s+all"
     state: present
+  notify: Restart Postgres
 
 - name: Install psycopg2 into system python
   pip:
