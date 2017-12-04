@@ -10,14 +10,14 @@
   lineinfile:
     path: "/etc/postgresql/{{ pg_version }}/main/postgresql.conf"
     line: "listen_addresses = '*'"
-    regex: "^listen_addresses"
+    regexp: "^listen_addresses"
     state: present
 
 - name: Configure postgres to allow incoming connections
   lineinfile:
     path: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
     line: "host all all 0.0.0.0/0"
-    regex: "^host\w+all"
+    regexp: "^host\\w+all"
     state: present
 
 - name: Install psycopg2 into system python
