@@ -1,3 +1,4 @@
+pg_version: 9.5
 database_user: grouporder
 database_name: grouporder
 database_password: hunter2

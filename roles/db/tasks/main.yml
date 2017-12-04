@@ -1,10 +1,24 @@
 - name: Install PostgreSQL and pip2
   apt:
     name:
-      - postgresql
+      - "postgresql-{{ pg_version }}"
       - python-pip
     state: installed
     update_cache: yes
+
+- name: Ensure postgres listens on all interfaces
+  lineinfile:
+    path: "/etc/postgresql/{{ pg_version }}/main/postgresql.conf"
+    line: "listen_addresses = '*'"
+    regex: "^listen_addresses"
+    state: present
+
+- name: Configure postgres to allow incoming connections
+  lineinfile:
+    path: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
+    line: "host all all 0.0.0.0/0"
+    regex: "^host\w+all"
+    state: present
 
 - name: Install psycopg2 into system python
   pip:
