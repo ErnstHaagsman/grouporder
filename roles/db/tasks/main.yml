@@ -18,7 +18,7 @@
   lineinfile:
     path: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
     line: "host all all 0.0.0.0/0 md5"
-    regexp: "^host\\s+all"
+    regexp: "^host\\s+all\\s+all\\s+0.0.0.0/0"
     state: present
   notify: Restart Postgres
 
