@@ -6,20 +6,16 @@
     state: installed
     update_cache: yes
 
-- name: Ensure postgres listens on all interfaces
-  lineinfile:
-    path: "/etc/postgresql/{{ pg_version }}/main/postgresql.conf"
-    line: "listen_addresses = '*'"
-    regexp: "^listen_addresses"
-    state: present
+- name: Copy postgresql.conf
+  copy:
+    src: files/postgresql.conf
+    dest: "/etc/postgresql/{{ pg_version }}/main/postgresql.conf"
   notify: Restart Postgres
 
-- name: Configure postgres to allow incoming connections
-  lineinfile:
-    path: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
-    line: "host all all 0.0.0.0/0 md5"
-    regexp: "^host\\s+all\\s+all\\s+0.0.0.0/0"
-    state: present
+- name: Copy pg_hba.conf
+  copy:
+    src: files/pg_hba.conf
+    dest: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
   notify: Restart Postgres
 
 - name: Install psycopg2 into system python
