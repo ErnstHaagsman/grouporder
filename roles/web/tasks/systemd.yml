@@ -1,0 +1,21 @@
+---
+- name: Gunicorn service file
+  template:
+    src: gunicorn.service.j2
+    dest: /etc/systemd/system/gunicorn.service
+
+- name: Gunicorn socket file
+  template:
+    src: gunicorn.socket.j2
+    dest: /etc/systemd/system/gunicorn.socket
+
+- name: Gunicorn tmpfiles.d
+  template:
+    src: gunicorn.conf.j2
+    dest: /etc/tmpfiles.d/gunicorn.conf
+
+- name: Enable Gunicorn systemd service
+  systemd:
+    name: gunicorn
+    enabled: yes
+    state: started

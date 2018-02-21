@@ -1,0 +1,9 @@
+bind = "unix:{{ app_socket }}"
+workers = 4
+errorlog = '-'
+loglevel = 'info'
+accesslog = '-'
+access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(L)s %(s)s %(b)s "%(f)s" "%(a)s"'
+{% if debug %}
+reload = true
+{% endif %}

@@ -1,0 +1,20 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+PIDFile={{ gunicorn_run_folder }}/pid
+User={{ app_user }}
+Group={{ app_group }}
+RuntimeDirectory=gunicorn
+WorkingDirectory={{ app_root }}
+ExecStart={{ gunicorn_path }} --pid {{ gunicorn_run_folder }}/pid   \
+          --config {{ gunicorn_config }} server:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+Environment="DATABASE_URI={{ database_uri }}"
+
+[Install]
+WantedBy=multi-user.target

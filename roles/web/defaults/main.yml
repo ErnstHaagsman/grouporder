@@ -1,0 +1,9 @@
+gunicorn_run_folder: /run/gunicorn
+nginx_run_folder: /run/nginx
+app_socket: "{{ gunicorn_run_folder }}/gunicorn.sock"
+app_user: www-data
+app_group: www-data
+debug: false
+gunicorn_path: /usr/bin/gunicorn
+gunicorn_config: /etc/gunicorn_config.py
+database_uri: "postgresql://{{ database_user }}:{{ database_password }}@localhost/{{ database_name }}"
