@@ -23,45 +23,51 @@ Content-Type: application/json
     "password": "hunter2"
 }
 
+> {% client.global.set("auth_token", response.body.token); %}
+
 ###
 POST http://localhost:5000/restaurants
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
+Authorization: Bearer {{ auth_token }}
 
 {
-    "name": "Tyfo Restaurant"
+    "name": "Wrong Name Restaurant"
+}
+
+> {% client.global.set("restaurant_id", response.body.id); %}
+
+###
+
+PUT http://localhost:5000/restaurants/{{ restaurant_id }}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ auth_token }}
+
+{
+    "name": "Pizza on the Corner"
 }
 
 ###
 
-PUT http://localhost:5000/restaurants/1
+POST http://localhost:5000/restaurants/{{ restaurant_id }}/menu
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 2ba8da57-b6e5-4cc5-8cb3-62cca92a37a6
-
-{
-    "name": "Typo Restaurant"
-}
-
-###
-
-POST http://localhost:5000/restaurants/1/menu
-Accept: application/json
-Content-Type: application/json
-Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+Authorization: Bearer {{ auth_token }}
 
 {
     "name": "Pizza Example",
     "price": 123
 }
 
+> {% client.global.set("menu_id", response.body.id); %}
+
 ###
 
-PUT http://localhost:5000/restaurants/1/menu/1
+PUT http://localhost:5000/restaurants/{{ restaurant_id }}/menu/{{ menu_id }}
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+Authorization: Bearer {{ auth_token }}
 
 {
     "name": "Pizza Example",
@@ -70,49 +76,39 @@ Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
 
 ###
 
-DELETE http://localhost:5000/restaurants/1/menu/1
-Authorization: Bearer dc0ac449-fbdd-494b-a0e8-9c7ed502588c
+DELETE http://localhost:5000/restaurants/{{ restaurant_id }}/menu/{{ menu_id }}
+Authorization: Bearer {{ auth_token }}
 
 ###
 
 POST http://localhost:5000/orders
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 43e7cfd5-63c5-40ee-868b-fca4f09a4dc7
+Authorization: Bearer {{ auth_token }}
 
 {
-    "restaurant_id": 1,
-    "order_time": "2017-11-24T14:30"
-}
-
-###
-
-POST http://localhost:5000/orders
-Accept: application/json
-Content-Type: application/json
-Authorization: Bearer 43e7cfd5-63c5-40ee-868b-fca4f09a4dc7
-
-{
-    "restaurant_id": 1,
+    "restaurant_id": {{ restaurant_id }},
     "order_time": "2017-11-24T15:30+0200"
 }
 
+> {% client.global.set("order_id", response.body.id); %}
+
 ###
 
-POST http://localhost:5000/orders/8
+POST http://localhost:5000/orders/{{ order_id }}
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 1503f404-ecee-487b-9710-10b34145666f
+Authorization: Bearer {{ auth_token }}
 
 {
-    "menu_item_id": 2
+    "menu_item_id": {{ menu_id }}
 }
 
 ###
 
-GET http://localhost:5000/orders/8
+GET http://localhost:5000/orders/{{ order_id }}
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 1503f404-ecee-487b-9710-10b34145666f
+Authorization: Bearer {{ auth_token }}
 
 ###
