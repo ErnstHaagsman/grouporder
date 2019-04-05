@@ -15,11 +15,12 @@ class RestaurantsApi(Resource):
         parser.add_argument('name', required=True, type=str,
                             help="The name of the restaurant")
         args = parser.parse_args()
+        name = args['name']
 
         try:
-            new_restaurant = Restaurant.create(args['name'])
+            new_restaurant = Restaurant.create(name)
         except DuplicateRestaurantNameError:
-            abort(409, message='There is already a restaurant with this name')
+            abort(409, message=f'There is already a restaurant named {name}')
 
         return {
             'id': new_restaurant.id,

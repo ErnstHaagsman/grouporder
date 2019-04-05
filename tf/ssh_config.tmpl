@@ -1,0 +1,13 @@
+Host management
+    HostName ${management_public_ip}
+    User ubuntu
+
+Host database
+    HostName ${database_private_ip}
+    User ubuntu
+    ProxyCommand ssh -W %h:%p management
+
+Host web
+    HostName ${web_private_ip}
+    User ubuntu
+    ProxyCommand ssh -W %h:%p management

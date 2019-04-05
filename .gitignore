@@ -2,3 +2,9 @@
 .vagrant/
 *.retry
 __pycache__/
+.terraform/
+*.tfstate
+*.backup
+terraform.tfvars
+*.out
+*.bak

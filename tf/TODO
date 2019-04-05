@@ -1,0 +1,19 @@
+- Finish install.sh
+    - Install Ansible
+    - Run ansible-playbook
+
+- Add provisioners to Terraform:
+    - Bootstrap management machine
+    - Copy over code (including Ansible roles!)
+    - Template the Ansible inventory (see https://www.terraform.io/docs/providers/template/d/file.html)
+    - Copy over Ansible inventory, config, and Playbook
+    - Run install.sh
+
+
+
+Notes
+-----
+
+Terraform provisioning should run with SSH agent authentication? So as long
+as the key is available in my computer, Ansible should be able to connect to
+the other computers in the Amazon VPC.

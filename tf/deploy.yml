@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  pre_tasks:
+   - name: 'Install Python 2'
+     raw: sudo apt update && sudo apt -y install python-simplejson
+
+- hosts: all
+  become: yes
+  roles:
+    - { role: common }
+
+- hosts: database
+  become: yes
+  roles:
+    - { role: db }
+
+- hosts: web
+  become: yes
+  vars:
+    venv_dir: /home/ubuntu/venv
+    requirements_file: /home/ubuntu/requirements.txt
+  pre_tasks:
+    - name: Upload requirements.txt
+      copy:
+        src: requirements.txt
+        dest: "{{ requirements_file }}"
+  roles:
+    - { role: python }
